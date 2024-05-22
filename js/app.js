@@ -1,8 +1,11 @@
-const io = require('socket.io')(3000, {
-  cors: {
-      origin: "*"
-  }
-});
+
+const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
 
 // 用來追蹤每個socket連接的房間
 const socketRoomMap = new Map();
