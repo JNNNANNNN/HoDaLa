@@ -1,11 +1,12 @@
 
-const express = require('express');
-const http = require('http');
-const socketIo = require('socket.io');
-
-const app = express();
-const server = http.createServer(app);
-const io = socketIo(server);
+const io = require('socket.io')(3000, {
+  cors: {
+    origin: "*",  // 这里可以更精确地指定来源，例如 http://localhost:8080
+    methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true
+  }
+});
 
 // 用來追蹤每個socket連接的房間
 const socketRoomMap = new Map();
